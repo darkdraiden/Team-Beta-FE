@@ -1,0 +1,184 @@
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { NavLink } from "react-router-dom";
+
+const Signup = () => {
+  const [inpval, setInpval] = useState({
+    name: "",
+    email: "",
+    date: "",
+    password: "",
+    profile: "",
+    phone: "",
+    address: "",
+  });
+
+  const handleProfileChange = (event) => {
+    setInpval({ ...inpval, profile: event.target.value });
+  };
+
+  const getdata = (e) => {
+    // console.log(e.target.name);
+    const { value, name } = e.target;
+    setInpval((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const addData = (e) => {
+    e.preventDefault();
+    console.log(inpval);
+    const { name, email, date, password, phone, address, profile} = inpval;
+
+    if (
+      name === "" ||
+      email === "" ||
+      date === "" ||
+      password === "" ||
+      phone === "" ||
+      address === ""
+    ) {
+      toast.error("All fields are required!", {
+        position: "top-center",
+      });
+    } else if (!email.includes("@")) {
+      toast.error("Please enter a valid email address", {
+        position: "top-center",
+      });
+    } else if (password.length < 5) {
+      toast.error("Password length should be greater than or equal to 5", {
+        position: "top-center",
+      });
+    } else if (phone.length > 10 || phone.length < 10) {
+      toast.error("Number should be of 10 digit", { position: "top-center" });
+    }else if(profile==="option0"){
+        toast.error("Select profile");
+    } 
+    else {
+      toast.success("Data added successfully", {
+        position: "top-center",
+      });
+    }
+  };
+
+  return (
+    <>
+      <div className="container mt-5">
+        <section className="d-flex justify-content-center">
+          <div
+            className="right_data mt-5"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <div className="sign_img mt-3">
+              <img
+                src="https://img.freepik.com/free-vector/coworkers-planning-making-objective_1262-19766.jpg?w=1380&t=st=1705671778~exp=1705672378~hmac=d9bfe8a8ad7445925445356d10510251b6f27e97030b25c3cdd4a351ee4c458c"
+                style={{ maxWidth: 400 }}
+                alt=""
+              />
+            </div>
+          </div>
+          <div
+            className="left_data mt-5 p-5 shadow"
+            style={{
+              width: "50%",
+              border: "1px solid #ddd",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <h3 className="text-center">Sign Up</h3>
+            <br />
+            <Form>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Control
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  onChange={getdata}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  onChange={getdata}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicDOB">
+                <Form.Control
+                  type="date"
+                  name="date"
+                  defaultValue=""
+                  onChange={getdata}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
+                <Form.Control
+                  type="text"
+                  name="phone"
+                  placeholder="Enter your phone number"
+                  onChange={getdata}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicAddress">
+                <Form.Control
+                  type="text"
+                  name="address"
+                  placeholder="Enter your address"
+                  onChange={getdata}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicProfile">
+                {/* <Form.Label>Select Profile</Form.Label> */}
+                <Form.Control as="select" name="profile" onChange={handleProfileChange} value={inpval.profile}>  
+                  <option value="option0">--select Profile--</option>
+                  <option value="frontend">Frontend </option>
+                  <option value="backend">Backend</option>
+                  <option value="devops">Devops</option>
+                  <option value="qa">QA</option> 
+                </Form.Control>
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control
+                  type="password"
+                  name="password"
+                  placeholder="Choose a password"
+                  onChange={getdata}
+                />
+              </Form.Group>
+
+              <Button
+                variant="primary"
+                className="w-100"
+                style={{ background: "rgb(67, 185, 127)" }}
+                onClick={addData}
+              >
+                Sign Up
+              </Button>
+            </Form>
+            <p className="mt-3 p-3">
+              If you already have an account?{" "}
+              <span>
+                <NavLink to="/login">Login Here</NavLink>
+              </span>{" "}
+            </p>
+          </div>
+        </section>
+        <ToastContainer />
+      </div>
+    </>
+  );
+};
+
+export default Signup;
