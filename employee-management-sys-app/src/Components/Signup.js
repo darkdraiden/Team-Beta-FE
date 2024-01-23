@@ -4,17 +4,29 @@ import Button from "react-bootstrap/Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavLink } from "react-router-dom";
+import { signup } from "../Services/user-service";
+import { useEffect } from 'react';
+// import axios from "axios";
+
+
+  
+
 
 const Signup = () => {
   const [inpval, setInpval] = useState({
-    name: "",
+    memberName: "",
     email: "",
-    date: "",
+    dob: "",
     password: "",
     profile: "",
-    phone: "",
+    phoneNumber: "",
     address: "",
   });
+
+
+useEffect(()=>{
+    console.log(inpval);
+})
 
   const handleProfileChange = (event) => {
     setInpval({ ...inpval, profile: event.target.value });
@@ -31,39 +43,58 @@ const Signup = () => {
 
   const addData = (e) => {
     e.preventDefault();
-    console.log(inpval);
-    const { name, email, date, password, phone, address, profile} = inpval;
-
+    const { memberName, email, dob, password, phoneNumber, address, profile } = inpval;
+  
+    signup(inpval)
+      .then(() => {
+        // The request was successful, show success message
+        toast.success("User registered successfully");
+        setInpval({
+          memberName: "",
+          email: "",
+          dob: "",
+          password: "",
+          profile: "",
+          phoneNumber: "",
+          address: ""
+        });
+      })
+      .catch((error) => {
+        // Handle the error and show error message
+        if (error.response) {
+          console.error('Backend Error:', error.response.data);
+          toast.error(error.response.data, { position: "top-center" });
+        } else if (error.request) {
+          console.error('No response received from the server:', error.request);
+          toast.error("No response received from the server", { position: "top-center" });
+        } else {
+          console.error('Error during request setup:', error.message);
+          toast.error("An error occurred during the request", { position: "top-center" });
+        }
+      });
+  
+    // Check if the signup request was successful before showing additional messages
     if (
-      name === "" ||
+      memberName === "" ||
       email === "" ||
-      date === "" ||
+      dob === "" ||
       password === "" ||
-      phone === "" ||
+      phoneNumber === "" ||
       address === ""
     ) {
-      toast.error("All fields are required!", {
-        position: "top-center",
-      });
+      toast.error("All fields are required!", { position: "top-center" });
     } else if (!email.includes("@")) {
-      toast.error("Please enter a valid email address", {
-        position: "top-center",
-      });
+      toast.error("Please enter a valid email address", { position: "top-center" });
     } else if (password.length < 5) {
-      toast.error("Password length should be greater than or equal to 5", {
-        position: "top-center",
-      });
-    } else if (phone.length > 10 || phone.length < 10) {
-      toast.error("Number should be of 10 digit", { position: "top-center" });
-    }else if(profile==="option0"){
-        toast.error("Select profile");
-    } 
-    else {
-      toast.success("Data added successfully", {
-        position: "top-center",
-      });
+      toast.error("Password length should be greater than or equal to 5", { position: "top-center" });
+    } else if (phoneNumber.length !== 10) {
+      toast.error("Number should be of 10 digits", { position: "top-center" });
+    } else if (profile === "option0") {
+      toast.error("Select profile");
     }
+    // You can remove the "else" block to avoid showing the success message again
   };
+  
 
   return (
     <>
@@ -97,7 +128,7 @@ const Signup = () => {
               <Form.Group className="mb-3" controlId="formBasicName">
                 <Form.Control
                   type="text"
-                  name="name"
+                  name="memberName"
                   placeholder="Enter your name"
                   onChange={getdata}
                 />
@@ -115,7 +146,7 @@ const Signup = () => {
               <Form.Group className="mb-3" controlId="formBasicDOB">
                 <Form.Control
                   type="date"
-                  name="date"
+                  name="dob"
                   defaultValue=""
                   onChange={getdata}
                 />
@@ -124,7 +155,7 @@ const Signup = () => {
               <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
                 <Form.Control
                   type="text"
-                  name="phone"
+                  name="phoneNumber"
                   placeholder="Enter your phone number"
                   onChange={getdata}
                 />
