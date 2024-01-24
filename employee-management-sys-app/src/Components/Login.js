@@ -5,12 +5,6 @@ import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from "react-router-dom";
 import { loginf } from "../Services/user-service";
-<<<<<<< HEAD
-
-
-
-const Login = () => {
-=======
 
 
 
@@ -22,17 +16,13 @@ const Login = ({setIsAuthenticated,setMember}) => {
   
 
   
->>>>>>> dashboard_manager
 
   const[login,setLogin]=useState({
     email:'',
     password:''
   });
   useEffect(()=>{
-<<<<<<< HEAD
-=======
     sessionStorage.getItem("isLoggedIn");
->>>>>>> dashboard_manager
     console.log(login);
 })
 
@@ -51,17 +41,12 @@ const Login = ({setIsAuthenticated,setMember}) => {
     const {email,password} = login;
   
     loginf(login)
-<<<<<<< HEAD
-      .then(() => {
-        // The request was successful, show success message
-=======
       .then((response) => {
         
         setIsAuthenticated(response);
         setMember(response);
         sessionStorage.setItem("isLoggedIn",true);
 
->>>>>>> dashboard_manager
         toast.success("Login Successfully");
         setLogin({
           
@@ -72,32 +57,12 @@ const Login = ({setIsAuthenticated,setMember}) => {
       })
       .catch((error) => {
         // Handle the error and show error message
-<<<<<<< HEAD
-        if (error.response) {
-          console.error('Backend Error:', error.response.data);
-          toast.error(error.response.data, { position: "top-center" });
-        } else if (error.request) {
-          console.error('No response received from the server:', error.request);
-          toast.error("No response received from the server", { position: "top-center" });
-        } else {
-          console.error('Error during request setup:', error.message);
-          toast.error("An error occurred during the request", { position: "top-center" });
-        }
-=======
         
        toast.error("Please Enter Correct Email or Password");
->>>>>>> dashboard_manager
       });
   
    
   };
-<<<<<<< HEAD
-  
-
-
-  
-=======
->>>>>>> dashboard_manager
   return (
     <>
       <div className="container mt-5">
