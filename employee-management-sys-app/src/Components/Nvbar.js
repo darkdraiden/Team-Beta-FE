@@ -1,9 +1,16 @@
+
 import React from 'react';
 
-const Nvbar = () => {
+
+const Nvbar = ({name,setIsAuthenticated}) => {
+ 
   const navbarStyle = {
-    backgroundColor: '#728C69', 
+    backgroundColor: '#198754 ', 
   };
+  const handleLogOut=()=>{
+    sessionStorage.setItem("isLoggedIn",false);
+   setIsAuthenticated(false);
+  }
   return (
     <>
       <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-success mb-3" style={navbarStyle}>
@@ -34,8 +41,12 @@ const Nvbar = () => {
             </ul>
 
             <ul className="navbar-nav ml-auto">
+            <li className="nav-item text-White">
+                <span className="nav-link text-white"> Hi, {name}</span>
+              </li>
+              
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link text-white" href="#" onClick={handleLogOut} >
                   <i className="fas fa-sign-out-alt"></i> Logout
                 </a>
               </li>
