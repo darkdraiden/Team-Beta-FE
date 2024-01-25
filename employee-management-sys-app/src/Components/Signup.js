@@ -7,8 +7,8 @@ import { NavLink } from "react-router-dom";
 import { signup } from "../Services/user-service";
 import { useEffect } from 'react';
 // import axios from "axios";
-
-
+import logo from '../images/logo.png';
+import '../Css/HomeStyle.css';
   
 
 
@@ -96,19 +96,40 @@ const addData = (e) => {
 
 return (
   <>
-    <div className="container mt-5">
+    <header>
+        <div className="container container-flex">
+          <div className="logoContainer">
+            <img src={logo} alt="logo" className="logo" />
+          </div>
+          <nav>
+            <div className="List">
+              <NavLink  to="/landing" className="listName" activeClassName="activeItem">
+                Home
+              </NavLink>
+              <NavLink  to="/About" className="listName" activeClassName="activeItem">
+                About
+              </NavLink>
+
+              <NavLink  to="/login" className="listName" activeClassName="activeItem">
+                Login
+              </NavLink>
+            </div>
+          </nav>
+        </div>
+      </header>
+    <div className="signup-container mt-5">
       <section className="d-flex justify-content-center">
         <div
           className="right_data mt-5"
-          style={{ display: "flex", alignItems: "center" }}
+          style={{ display: "flex", alignItems: "center"}}
         >
-          <div className="sign_img mt-3">
+          {/* <div className="sign_img mt-3">
             <img
               src="https://img.freepik.com/free-vector/coworkers-planning-making-objective_1262-19766.jpg?w=1380&t=st=1705671778~exp=1705672378~hmac=d9bfe8a8ad7445925445356d10510251b6f27e97030b25c3cdd4a351ee4c458c"
               style={{ maxWidth: 400 }}
               alt=""
             />
-          </div>
+          </div> */}
         </div>
         <div
           className="left_data mt-5 p-5 shadow"
@@ -118,6 +139,9 @@ return (
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
             display: "flex",
             flexDirection: "column",
+            
+            borderRadius:'7px',
+            background: '#e0f9ee', 
           }}
           >
           <h3 className="text-center">Sign Up</h3>
@@ -197,13 +221,18 @@ return (
             <p className="mt-3 p-3">
               If you already have an account?{" "}
               <span>
-                <NavLink to="/">Login Here</NavLink>
+                <NavLink to="/login">Login Here</NavLink>
               </span>{" "}
             </p>
           </div>
         </section>
         <ToastContainer />
       </div>
+      <footer>
+          <div class="copyright">
+              <p>All rights reserved &copy;</p>
+          </div>
+        </footer>
     </>
   );
 };

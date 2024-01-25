@@ -10,6 +10,7 @@ import OtherTeams from '../Pages/OtherTeams';
 import Profile from '../Pages/Profile';
 import EditProfile from '../Pages/EditProfile';
 
+
 const Home = ({member}) => {
   return (
     <div>
@@ -17,11 +18,12 @@ const Home = ({member}) => {
             <Sidebar/>
             <Routes>
                 <Route exact path='/' element={<Dash/>} ></Route>
+                
                 <Route exact path='/profile' element={<Profile member={member}/>} ></Route>
                 <Route  exact path='/manageteam' element={<ManageTeam/>} ></Route>
                 <Route exact path='/salary' element={<Salary member={member}/> } ></Route>
                 <Route exact path='/leaves' element={<Leaves member={member}/>} ></Route>
-                {/* <Route exact path='/otherteam' element={<OtherTeams/>} ></Route> */}
+               
                 <Route exact path='/update' element={<EditProfile member={member} />}></Route>
 
             </Routes>
