@@ -21,7 +21,7 @@ function App() {
     else{
       setIsAuthenticated(false);
     }
-  },[])
+  },[isAuthenticated])
   return (
 
     
@@ -34,7 +34,7 @@ function App() {
           {" "}
           <Router>
             <Routes>
-              <Route exact path="/" element={<Login setIsAuthenticated={setIsAuthenticated} setMember={setMember}/>} />
+              <Route exact path="/auth" element={<Login setIsAuthenticated={setIsAuthenticated} setMember={setMember}/>} />
               <Route exact path="/signup" element={<Signup />} />
             </Routes>
           </Router>
@@ -42,7 +42,7 @@ function App() {
       ) : (
         <div >
           <Nvbar  name={member.memberName}  setIsAuthenticated={setIsAuthenticated}/>
-          <Home member={member}/>
+          <Home member={member} setMember={setMember}/>
         </div>
       )}
     </div>

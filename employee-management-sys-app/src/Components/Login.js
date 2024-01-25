@@ -5,7 +5,7 @@ import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from "react-router-dom";
 import { loginf } from "../Services/user-service";
-
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -13,7 +13,7 @@ import { loginf } from "../Services/user-service";
 const Login = ({setIsAuthenticated,setMember}) => {
 
   
-  
+  const navigate=useNavigate();
 
   
 
@@ -48,6 +48,7 @@ const Login = ({setIsAuthenticated,setMember}) => {
         sessionStorage.setItem("isLoggedIn",true);
 
         toast.success("Login Successfully");
+        navigate("/");
         setLogin({
           
           email: "",

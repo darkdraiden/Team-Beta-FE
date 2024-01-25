@@ -1,32 +1,51 @@
+// Leaves.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Leaves = ({ memberId }) => {
+const Leaves = ({ member }) => {
   const [leaveCount, setLeaveCount] = useState(0);
 
-  // Fetch initial leave count on component mount
   useEffect(() => {
     fetchLeaveCount();
-  }, []);
+  }, [member]);
 
   const fetchLeaveCount = async () => {
     try {
-      // Assume your backend API provides the leave count for a member
-      const response = await axios.get(`http://localhost:8080/member/${memberId}/leaveCount`);
-      setLeaveCount(response.data.leaveCount);
+      if (member && member.member_Id) {
+        const response = await axios.get(`http://localhost:8080/member/leaves/${member.member_Id}`);
+        setLeaveCount(response.data);
+      }
     } catch (error) {
       console.error('Error fetching leave count:', error);
     }
   };
 
+  useEffect(() => {
+    console.log('Leave Count Updated:', leaveCount);
+  }, [leaveCount]);
+
   const handleApplyLeave = async () => {
     try {
-      // Send a request to the backend to apply leave
-      await axios.post(`http://localhost:8080/member/${memberId}/applyLeave`);
-      // Update the leave count in the state
-      setLeaveCount(prevLeaveCount => prevLeaveCount - 1);
+      if (member && member.member_Id) {
+        const response = await axios.put(`http://localhost:8080/member/leaves/${member.member_Id}`);
+        console.log(response);
+        // Fetch the updated leave count after applying leave
+        await fetchLeaveCount();
+      }
     } catch (error) {
       console.error('Error applying leave:', error);
+    }
+  };
+
+  const handleViewLeaves = async () => {
+    try {
+      // Wait for handleApplyLeave to complete before fetching the count
+      await handleApplyLeave();
+      console.log("view leaves");
+      const response = await axios.get(`http://localhost:8080/member/leaves/${member.member_Id}`);
+      setLeaveCount(response.data);
+    } catch (error) {
+      console.error('Error fetching leave count:', error);
     }
   };
 
@@ -35,7 +54,7 @@ const Leaves = ({ memberId }) => {
       <h2>Leave Management</h2>
       <p>Remaining Leaves: {leaveCount}</p>
       <button onClick={handleApplyLeave}>Apply Leave</button> <br/><br/>
-      <button onClick={fetchLeaveCount}>View Leaves</button>
+      <button onClick={handleViewLeaves}>View Leaves</button>
     </div>
   );
 };

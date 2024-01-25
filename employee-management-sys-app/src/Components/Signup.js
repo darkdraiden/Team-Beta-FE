@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { signup } from "../Services/user-service";
 import { useEffect } from 'react';
 // import axios from "axios";
-
+import bcrypt from 'bcryptjs';
 
   
 
@@ -40,11 +40,26 @@ const getdata = (e) => {
   }));
 };
 
-const addData = (e) => {
+
+const addData = async (e) => {
   e.preventDefault();
+
   const { memberName, email, dob, password, phoneNumber, address, profile } = inpval;
 
-  signup(inpval)
+  // Hash the password using bcrypt
+  const hashedPassword = await bcrypt.hash(password, 10); // 10 is the number of salt rounds
+
+  const userData = {
+    memberName,
+    email,
+    dob,
+    password: hashedPassword, // Use the hashed password
+    phoneNumber,
+    address,
+    profile,
+  };
+
+  signup(userData)
     .then(() => {
       // The request was successful, show success message
       toast.success("User registered successfully");
@@ -55,7 +70,7 @@ const addData = (e) => {
         password: "",
         profile: "",
         phoneNumber: "",
-        address: ""
+        address: "",
       });
     })
     .catch((error) => {
@@ -170,10 +185,10 @@ return (
                 {/* <Form.Label>Select Profile</Form.Label> */}
                 <Form.Control as="select" name="profile" onChange={handleProfileChange} value={inpval.profile}>  
                   <option value="option0">--select Profile--</option>
-                  <option value="frontend">Frontend </option>
-                  <option value="backend">Backend</option>
-                  <option value="devops">Devops</option>
-                  <option value="qa">QA</option> 
+                  <option value="Java">Java </option>
+                  <option value="Python">Python</option>
+                  <option value="ELK">ELK</option>
+                  <option value="Node Js">Node Js</option> 
                 </Form.Control>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -181,7 +196,7 @@ return (
                   type="password"
                   name="password"
                   placeholder="Choose a password"
-                  onChange={getdata}
+                  onChange={getdata} required
                 />
               </Form.Group>
 
@@ -197,7 +212,7 @@ return (
             <p className="mt-3 p-3">
               If you already have an account?{" "}
               <span>
-                <NavLink to="/">Login Here</NavLink>
+                <NavLink to="/auth">Login Here</NavLink>
               </span>{" "}
             </p>
           </div>

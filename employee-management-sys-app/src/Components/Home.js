@@ -10,7 +10,7 @@ import OtherTeams from '../Pages/OtherTeams';
 import Profile from '../Pages/Profile';
 import EditProfile from '../Pages/EditProfile';
 
-const Home = ({member}) => {
+const Home = ({member, setMember}) => {
   return (
     <div>
         <Router>
@@ -22,7 +22,7 @@ const Home = ({member}) => {
                 <Route exact path='/salary' element={<Salary member={member}/> } ></Route>
                 <Route exact path='/leaves' element={<Leaves member={member}/>} ></Route>
                 {/* <Route exact path='/otherteam' element={<OtherTeams/>} ></Route> */}
-                <Route exact path='/update' element={<EditProfile member={member} />}></Route>
+                <Route exact path='/update' element={<EditProfile member={member} setMember={setMember} />}></Route>
 
             </Routes>
         </Router>

@@ -1,15 +1,19 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Nvbar = ({name,setIsAuthenticated}) => {
  
+
+
   const navbarStyle = {
     backgroundColor: '#198754 ', 
   };
   const handleLogOut=()=>{
     sessionStorage.setItem("isLoggedIn",false);
    setIsAuthenticated(false);
+  
   }
   return (
     <>
@@ -46,7 +50,7 @@ const Nvbar = ({name,setIsAuthenticated}) => {
               </li>
               
               <li className="nav-item">
-                <a className="nav-link text-white" href="#" onClick={handleLogOut} >
+                <a className="nav-link text-white" href="/auth" onClick={handleLogOut} >
                   <i className="fas fa-sign-out-alt"></i> Logout
                 </a>
               </li>

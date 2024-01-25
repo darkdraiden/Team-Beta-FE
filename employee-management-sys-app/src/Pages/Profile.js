@@ -6,14 +6,14 @@ const Profile = ({member}) => {
   
   const [email, setEmail] = useState(''); // State to store email
   const [password, setPassword] = useState(''); // State to store password
+  
+
 
   useEffect(() => {
-    // Set your logged-in user's email and password
-    
-
-    // Set email and password states
+   
     setEmail(member.email);
     setPassword(member.password);
+    
 
     // Fetch user data based on email and password
     // fetchUserData(member.email, userCredentials.password);
@@ -38,12 +38,14 @@ const Profile = ({member}) => {
     width: '100%',
     borderCollapse: 'collapse',
     marginTop: '20px',
+    
   };
 
   const cellStyle = (index) => ({
     border: '1px solid #ddd',
     padding: '8px',
     backgroundColor: index % 2 === 0 ? '#E5F6D3' : '#C5E8B7',
+    textTransform: 'capitalize',
   });
 
   const thStyle = {

@@ -3,7 +3,7 @@ import axios from 'axios';
 import './EditProfile.css';
 import { toast } from 'react-toastify';
 
-const EditProfile = ({member}) => {
+const EditProfile = ({member,setMember}) => {
   // State to manage form fields
 
   
@@ -14,6 +14,7 @@ const EditProfile = ({member}) => {
     phoneNumber: `${member.phoneNumber}`,
     profile:`${member.profile}`,
     address: `${member.address}`,
+    
     
     
   });
@@ -37,8 +38,9 @@ const EditProfile = ({member}) => {
 
     try {
       // Update employee data in the backend
-      await axios.put(`http://localhost:8080/member/update/${member.member_Id}`, formData);
+      const response=await axios.put(`http://localhost:8080/member/update/${member.member_Id}`, formData);
       setMessage('Profile updated successfully!');
+      setMember(response.data);
     } catch (error) {
       // setMessage('Error updating profile. Please try again.');
       console.error('Error updating profile:', error);
@@ -58,6 +60,7 @@ const EditProfile = ({member}) => {
             name="memberName"
             value={formData.memberName}
             onChange={handleInputChange}
+            disabled
           />
         </div>
         <div className="form-group">
@@ -68,6 +71,7 @@ const EditProfile = ({member}) => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
+            disabled
           />
         </div>
         <div className="form-group">
@@ -92,6 +96,8 @@ const EditProfile = ({member}) => {
           />
         </div>
 
+        
+
         <div className='form-group'>
   <label htmlFor="profile">Profile:</label>
   <select
@@ -100,6 +106,7 @@ const EditProfile = ({member}) => {
     value={formData.profile}
     onChange={handleInputChange}
     className="form-group"
+    style={{ width: '100%', padding: '8px' }}
   >
     <option value="option0">-- Select Profile --</option>
     <option value="frontend">Frontend</option>
@@ -108,6 +115,7 @@ const EditProfile = ({member}) => {
     <option value="qa">QA</option>
   </select>
 </div>
+
 
 
         
