@@ -12,6 +12,7 @@ const Landing = () => {
         <div className="container container-flex">
           <div className="logoContainer">
             <img src={logo} alt="logo" className="logo" />
+            <h2>EmploEase</h2>
           </div>
           <nav>
             <div className="List">

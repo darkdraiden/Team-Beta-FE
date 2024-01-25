@@ -132,7 +132,7 @@ return (
           </div> */}
         </div>
         <div
-          className="left_data mt-5 p-5 shadow"
+          className="left_data mt-2 p-5 shadow"
           style={{
             width: "50%",
             border: "1px solid #ddd",

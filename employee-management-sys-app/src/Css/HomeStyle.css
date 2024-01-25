@@ -28,6 +28,7 @@ header{
 .logo{
     width:65px;
     height:50px;
+    margin-left: 2rem;
     /* padding:0.5em em; */
     /* margin:0; */
 }
@@ -119,6 +120,17 @@ footer{
     padding:1em 0;
     
 }
+.logoContainer{
+    display:flex;
+
+}
+.logoContainer h2{
+    color:#198754;
+    margin:auto;
+    margin-left: 1.5%;
+
+}
+
 
 /* HomeStyle.css */
 .custom-container {

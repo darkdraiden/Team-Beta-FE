@@ -8,7 +8,7 @@ import { loginf } from "../Services/user-service";
 import '../Css/HomeStyle.css';
 
 import logo from '../images/logo.png';
-import login from '../images/login.gif';
+import login_image from '../images/login_image.gif';
 
 const Login = ({setIsAuthenticated,setMember}) => {
 
@@ -91,10 +91,10 @@ const Login = ({setIsAuthenticated,setMember}) => {
         
         <div className="right_data mt-5" style={{ display: 'flex', alignItems: 'center' }}>
             <div className="sign_img mt-3">
-              <img src={login} style={{ maxWidth: 400 }} alt="" />
+              <img src={login_image} style={{ maxWidth: 400 }} alt="" />
             </div>
           </div>
-          <div className="left_data mt-5 p-5 shadow" style={{ width: "50%", border: '1px solid #ddd', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', display: 'flex', flexDirection: 'column', background: '#e0f9ee' ,borderRadius: '7px'}}>
+          <div className="left_data mt-5 p-5 shadow" style={{ width: "50%", border: '1px solid #ddd', display: 'flex', flexDirection: 'column', background: '#e0f9ee' ,borderRadius: '7px'}}>
             <h3 className='text-center'>Login</h3>
             <br />
             <Form>
