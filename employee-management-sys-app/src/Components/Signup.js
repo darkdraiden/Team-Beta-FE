@@ -161,7 +161,7 @@ return (
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                onChange={getdata}
+                onChange={getdata} required
               />
             </Form.Group>
 
