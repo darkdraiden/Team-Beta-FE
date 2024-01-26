@@ -43,7 +43,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<Login setIsAuthenticated={setIsAuthenticated} setMember={setMember}/>} />
               <Route exact path="/signup" element={<Signup />} />
-              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setMember={setMember}/>} />
             </Routes>
           </Router>
         </div>

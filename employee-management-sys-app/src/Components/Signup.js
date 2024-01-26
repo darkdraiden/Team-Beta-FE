@@ -194,10 +194,10 @@ return (
                 {/* <Form.Label>Select Profile</Form.Label> */}
                 <Form.Control as="select" name="profile" onChange={handleProfileChange} value={inpval.profile}>  
                   <option value="option0">--select Profile--</option>
-                  <option value="frontend">Frontend </option>
-                  <option value="backend">Backend</option>
-                  <option value="devops">Devops</option>
-                  <option value="qa">QA</option> 
+                  <option value="Java">Java </option>
+                  <option value="Python">Python</option>
+                  <option value="Node Js">Node Js</option>
+                  <option value="ELK">ELK</option> 
                 </Form.Control>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
