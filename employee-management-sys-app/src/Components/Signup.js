@@ -5,6 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavLink } from "react-router-dom";
 import { signup } from "../Services/user-service";
+import { useEffect } from 'react';
+// import axios from "axios";
+import logo from '../images/logo.png';
+import '../Css/HomeStyle.css';
+ 
 
 
 const Signup = () => {
@@ -37,8 +42,11 @@ const Signup = () => {
         toast.error("All fields are required!", { position: "top-center" });
         return;
       }
+
     }
-    const { memberName, email, dob, password, phoneNumber, address, profile } = inpval;
+   
+
+  const { memberName, email, dob, password, phoneNumber, address, profile } = inpval;
 
     if (memberName.trim() === "") {
       toast.error("Name is required", { position: "top-center" });
@@ -72,8 +80,7 @@ const Signup = () => {
       toast.error("Password length should be at least 8 characters", { position: "top-center" });
       return;
     }
-
-    // Hash the password using bcrypt
+  // Hash the password using bcrypt
     
 
     const userData = {
@@ -114,19 +121,84 @@ const Signup = () => {
       console.log(password);
   };
 
-  return (
-    <>
-      <div className="container mt-5">
-        <section className="d-flex justify-content-center">
-          <div
-            className="right_data mt-5"
-            style={{ display: "flex", alignItems: "center" }}
+
+return (
+  <>
+    <header>
+        <div className="container container-flex">
+          <div className="logoContainer">
+            <img src={logo} alt="logo" className="logo" />
+          </div>
+          <nav>
+            <div className="List">
+              <NavLink  to="/landing" className="listName" activeClassName="activeItem">
+                Home
+              </NavLink>
+              <NavLink  to="/About" className="listName" activeClassName="activeItem">
+                About
+              </NavLink>
+
+              <NavLink  to="/login" className="listName" activeClassName="activeItem">
+                Login
+              </NavLink>
+            </div>
+          </nav>
+        </div>
+      </header>
+    <div className="signup-container mt-5">
+      <section className="d-flex justify-content-center">
+        <div
+          className="right_data mt-5"
+          style={{ display: "flex", alignItems: "center"}}
+        >
+          {/* <div className="sign_img mt-3">
+            <img
+              src="https://img.freepik.com/free-vector/coworkers-planning-making-objective_1262-19766.jpg?w=1380&t=st=1705671778~exp=1705672378~hmac=d9bfe8a8ad7445925445356d10510251b6f27e97030b25c3cdd4a351ee4c458c"
+              style={{ maxWidth: 400 }}
+              alt=""
+            />
+          </div> */}
+        </div>
+        <div
+          className="left_data mt-2 p-5 shadow"
+          style={{
+            width: "50%",
+            border: "1px solid #ddd",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            display: "flex",
+            flexDirection: "column",
+            
+            borderRadius:'7px',
+            background: '#e0f9ee', 
+          }}
           >
-            <div className="sign_img mt-3">
-              <img
-                src="https://img.freepik.com/free-vector/coworkers-planning-making-objective_1262-19766.jpg?w=1380&t=st=1705671778~exp=1705672378~hmac=d9bfe8a8ad7445925445356d10510251b6f27e97030b25c3cdd4a351ee4c458c"
-                style={{ maxWidth: 400 }}
-                alt=""
+          <h3 className="text-center">Sign Up</h3>
+          <br />
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicName">
+              <Form.Control
+                type="text"
+                name="memberName"
+                placeholder="Enter your name"
+                onChange={getdata}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                onChange={getdata} required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicDOB">
+              <Form.Control
+                type="date"
+                name="dob"
+                defaultValue=""
+                onChange={getdata}
               />
             </div>
           </div>
@@ -200,6 +272,7 @@ const Signup = () => {
                   <option value="Python">Python</option>
                   <option value="ELK">ELK</option>
                   <option value="Node Js">Node Js</option>
+
                 </Form.Control>
               </Form.Group>
 
@@ -233,6 +306,11 @@ const Signup = () => {
         </section>
         <ToastContainer />
       </div>
+      <footer>
+          <div class="copyright">
+              <p>All rights reserved &copy;</p>
+          </div>
+        </footer>
     </>
   );
 };

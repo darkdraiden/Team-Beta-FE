@@ -9,6 +9,8 @@ import Nvbar from "./Components/Nvbar";
 import Home from "./Components/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Landing from './Pages/Landing';
+import About from './Pages/About';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,8 +29,13 @@ function App() {
 
     
     <div className="App">
-      
-
+      <Router>
+        <Routes>
+        <Route exact path='/' element={<Landing/>} ></Route>
+        <Route exact path='/landing' element={<Landing/>} ></Route>
+      <Route exact path='/About' element={<About/>} ></Route>
+      </Routes>
+      </Router>
 
       {(isAuthenticated===false)? (
         <div>
@@ -37,6 +44,7 @@ function App() {
             <Routes>
               <Route exact path="/auth" element={<Login setIsAuthenticated={setIsAuthenticated} setMember={setMember} />} />
               <Route exact path="/signup" element={<Signup />} />
+              <Route exact path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} setMember={setMember}/>} />
             </Routes>
           </Router>
         </div>
