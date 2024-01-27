@@ -5,15 +5,16 @@ import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from "react-router-dom";
 import { loginf } from "../Services/user-service";
+import { useNavigate } from "react-router-dom";
 import '../Css/HomeStyle.css';
-
 import logo from '../images/logo.png';
 import login_image from '../images/login_image.gif';
+
 
 const Login = ({setIsAuthenticated,setMember}) => {
 
   
-  
+  const navigate=useNavigate();
 
   
 
@@ -21,10 +22,17 @@ const Login = ({setIsAuthenticated,setMember}) => {
     email:'',
     password:''
   });
-  useEffect(()=>{
-    sessionStorage.getItem("isLoggedIn");
-    console.log(login);
-})
+//   useEffect(()=>{
+//     sessionStorage.getItem("isLoggedIn");
+//     console.log(login);
+// })
+
+useEffect(() => {
+  const storedLogin = localStorage.getItem("userLogin");
+  if (storedLogin) {
+    setLogin(JSON.parse(storedLogin));
+  }
+}, []);
 
   const getdata = (e) => {
     // console.log(e.target.name);
@@ -38,31 +46,30 @@ const Login = ({setIsAuthenticated,setMember}) => {
 
   const addData = (e) => {
     e.preventDefault();
-    const {email,password} = login;
-  
+    const { email, password } = login;
+
     loginf(login)
       .then((response) => {
-        
         setIsAuthenticated(response);
         setMember(response);
-        sessionStorage.setItem("isLoggedIn",true);
+        sessionStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("memberid",response.member_Id);
+        localStorage.setItem("userLogin", JSON.stringify(login)); // Save login data to localStorage
 
         toast.success("Login Successfully");
+        navigate("/");
         setLogin({
-          
           email: "",
           password: "",
-          
         });
       })
       .catch((error) => {
-        // Handle the error and show error message
-        
-       toast.error("Please Enter Correct Email or Password");
+        toast.error("Please Enter Correct Email or Password");
       });
-  
-   
   };
+
+
+
   return (
     <>
       <header>

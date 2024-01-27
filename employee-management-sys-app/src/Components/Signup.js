@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 // import axios from "axios";
 import logo from '../images/logo.png';
 import '../Css/HomeStyle.css';
-  
+ 
 
 
 const Signup = () => {
@@ -23,76 +23,104 @@ const Signup = () => {
     address: "",
   });
 
+  const handleProfileChange = (event) => {
+    setInpval({ ...inpval, profile: event.target.value });
+  };
 
-useEffect(()=>{
-    console.log(inpval);
-})
-const handleProfileChange = (event) => {
-  setInpval({ ...inpval, profile: event.target.value });
-};
+  const getdata = (e) => {
+    const { value, name } = e.target;
+    setInpval((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-const getdata = (e) => {
-  // console.log(e.target.name);
-  const { value, name } = e.target;
-  setInpval((prevData) => ({
-    ...prevData,
-    [name]: value,
-  }));
-};
+  const addData = async (e) => {
+    e.preventDefault();
+    for (const key in inpval) {
+      if (inpval[key].trim() === "") {
+        toast.error("All fields are required!", { position: "top-center" });
+        return;
+      }
 
-const addData = (e) => {
-  e.preventDefault();
+    }
+   
+
   const { memberName, email, dob, password, phoneNumber, address, profile } = inpval;
 
-  signup(inpval)
-    .then(() => {
-      // The request was successful, show success message
-      toast.success("User registered successfully");
-      setInpval({
-        memberName: "",
-        email: "",
-        dob: "",
-        password: "",
-        profile: "",
-        phoneNumber: "",
-        address: ""
-      });
-    })
-    .catch((error) => {
-      // Handle the error and show error message
-      if (error.response) {
-        console.error('Backend Error:', error.response.data);
-        toast.error(error.response.data, { position: "top-center" });
-      } else if (error.request) {
-        console.error('No response received from the server:', error.request);
-        toast.error("No response received from the server", { position: "top-center" });
-      } else {
-        console.error('Error during request setup:', error.message);
-        toast.error("An error occurred during the request", { position: "top-center" });
-      }
-    });
+    if (memberName.trim() === "") {
+      toast.error("Name is required", { position: "top-center" });
+      return;
+    }
+    if (email.trim() === "") {
+      toast.error("Email is required", { position: "top-center" });
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      toast.error("Please enter a valid email address", { position: "top-center" });
+      return;
+    }
+    if (phoneNumber.trim() === "") {
+      toast.error("Phone Number is required", { position: "top-center" });
+      return;
+    }
+    if (address.trim() === "") {
+      toast.error("Address is required", { position: "top-center" });
+      return;
+    }
+    if (inpval.profile.trim() === "option0") {
+      toast.error("Please select a profile", { position: "top-center" });
+      return;
+    }
+    if (password.trim() === "") {
+      toast.error("Password is required", { position: "top-center" });
+      return;
+    }
+    if (password.length < 8) {
+      toast.error("Password length should be at least 8 characters", { position: "top-center" });
+      return;
+    }
+  // Hash the password using bcrypt
+    
 
-  // Check if the signup request was successful before showing additional messages
-  if (
-    memberName === "" ||
-    email === "" ||
-    dob === "" ||
-    password === "" ||
-    phoneNumber === "" ||
-    address === ""
-  ) {
-    toast.error("All fields are required!", { position: "top-center" });
-  } else if (!email.includes("@")) {
-    toast.error("Please enter a valid email address", { position: "top-center" });
-  } else if (password.length < 5) {
-    toast.error("Password length should be greater than or equal to 5", { position: "top-center" });
-  } else if (phoneNumber.length !== 10) {
-    toast.error("Number should be of 10 digits", { position: "top-center" });
-  } else if (profile === "option0") {
-    toast.error("Select profile");
-  }
-};
-  
+    const userData = {
+      memberName,
+      email,
+      dob,
+      password,
+      phoneNumber,
+      address,
+      profile,
+    };
+
+    signup(userData)
+      .then(() => {
+        toast.success("User registered successfully");
+        setInpval({
+          memberName: "",
+          email: "",
+          dob: "",
+          password: "",
+          profile: "",
+          phoneNumber: "",
+          address: "",
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.error('Backend Error:', error.response.data);
+          toast.error(error.response.data, { position: "top-center" });
+        } else if (error.request) {
+          console.error('No response received from the server:', error.request);
+          toast.error("No response received from the server", { position: "top-center" });
+        } else {
+          console.error('Error during request setup:', error.message);
+          toast.error("An error occurred during the request", { position: "top-center" });
+        }
+      });
+      console.log(password);
+  };
+
 
 return (
   <>
@@ -172,13 +200,58 @@ return (
                 defaultValue=""
                 onChange={getdata}
               />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
+            </div>
+          </div>
+          <div
+            className="left_data mt-5 p-5 shadow"
+            style={{
+              width: "50%",
+              border: "1px solid #ddd",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <h3 className="text-center">Sign Up</h3>
+            <br />
+            <Form>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Control
+                  type="text"
+                  name="memberName"
+                  placeholder="Enter your name"
+                  onChange={getdata}
+                  value={inpval.memberName}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  onChange={getdata}
+                  value={inpval.email}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicDOB">
+                <Form.Control
+                  type="date"
+                  name="dob"
+                
+                  onChange={getdata}
+                  value={inpval.dob}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
                 <Form.Control
                   type="text"
                   name="phoneNumber"
                   placeholder="Enter your phone number"
                   onChange={getdata}
+                  value={inpval.phoneNumber}
                 />
               </Form.Group>
 
@@ -188,24 +261,28 @@ return (
                   name="address"
                   placeholder="Enter your address"
                   onChange={getdata}
+                  value={inpval.address}
                 />
               </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicProfile">
-                {/* <Form.Label>Select Profile</Form.Label> */}
-                <Form.Control as="select" name="profile" onChange={handleProfileChange} value={inpval.profile}>  
+                <Form.Control as="select" name="profile" onChange={handleProfileChange} value={inpval.profile}>
                   <option value="option0">--select Profile--</option>
                   <option value="Java">Java </option>
                   <option value="Python">Python</option>
+                  <option value="ELK">ELK</option>
                   <option value="Node Js">Node Js</option>
-                  <option value="ELK">ELK</option> 
+
                 </Form.Control>
               </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control
                   type="password"
                   name="password"
                   placeholder="Choose a password"
                   onChange={getdata}
+                  required
                 />
               </Form.Group>
 
@@ -218,10 +295,11 @@ return (
                 Sign Up
               </Button>
             </Form>
+
             <p className="mt-3 p-3">
               If you already have an account?{" "}
               <span>
-                <NavLink to="/login">Login Here</NavLink>
+                <NavLink to="/auth">Login Here</NavLink>
               </span>{" "}
             </p>
           </div>

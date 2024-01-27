@@ -1,15 +1,19 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Nvbar = ({name,setIsAuthenticated}) => {
  
+
+
   const navbarStyle = {
     backgroundColor: '#198754 ', 
   };
   const handleLogOut=()=>{
     sessionStorage.setItem("isLoggedIn",false);
    setIsAuthenticated(false);
+  
   }
   return (
     <>
@@ -46,7 +50,7 @@ const Nvbar = ({name,setIsAuthenticated}) => {
               </li>
               
               <li className="nav-item">
-                <a className="nav-link text-white" href="#" onClick={handleLogOut} >
+                <a className="nav-link text-white" href="/auth" onClick={handleLogOut} >
                   <i className="fas fa-sign-out-alt"></i> Logout
                 </a>
               </li>
@@ -59,3 +63,58 @@ const Nvbar = ({name,setIsAuthenticated}) => {
 };
 
 export default Nvbar;
+
+// import React from 'react';
+// import { Link } from 'react-router-dom';
+
+// const Nvbar = ({ name, setIsAuthenticated }) => {
+//   const handleLogOut = () => {
+//     sessionStorage.setItem('isLoggedIn', false);
+//     setIsAuthenticated(false);
+//   };
+
+//   return (
+//     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+//       <div className="container">
+//         <Link to="/" className="navbar-brand">
+//           <img src="" alt="Logo" className="logo rounded" style={{ width: '50px', height: 'auto', marginRight: '8px' }} />
+//           EmployeeEase
+//         </Link>
+
+//         <button
+//           className="navbar-toggler"
+//           type="button"
+//           data-toggle="collapse"
+//           data-target="#navbarNav"
+//           aria-controls="navbarNav"
+//           aria-expanded="false"
+//           aria-label="Toggle navigation"
+//         >
+//           <span className="navbar-toggler-icon"></span>
+//         </button>
+
+//         <div className="collapse navbar-collapse" id="navbarNav">
+//           <ul className="navbar-nav ml-auto">
+//             <li className="nav-item">
+//               <Link to="/" className="nav-link">
+//                 Home
+//               </Link>
+//             </li>
+
+//             <li className="nav-item">
+//               <span className="nav-link">Hi, {name}</span>
+//             </li>
+
+//             <li className="nav-item">
+//               <Link to="/auth" className="nav-link" onClick={handleLogOut}>
+//                 <i className="fas fa-sign-out-alt"></i> Logout
+//               </Link>
+//             </li>
+//           </ul>
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Nvbar;

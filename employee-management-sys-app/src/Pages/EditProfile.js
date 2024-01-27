@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './EditProfile.css';
 import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const EditProfile = ({member}) => {
+
+const EditProfile = ({member,setMember}) => {
   // State to manage form fields
 
-  
+  const id=localStorage.getItem("memberid");
   const [formData, setFormData] = useState({
    
     memberName: `${member.memberName}`,
@@ -16,10 +19,13 @@ const EditProfile = ({member}) => {
     address: `${member.address}`,
     
     
+    
   });
   console.log(formData);
   
   const [message, setMessage] = useState('');
+  
+  
 
   const{member_id,memberName,email,phoneNumber,address,dob}=formData;
 
@@ -37,13 +43,20 @@ const EditProfile = ({member}) => {
 
     try {
       // Update employee data in the backend
-      await axios.put(`http://localhost:8080/member/update/${member.member_Id}`, formData);
-      setMessage('Profile updated successfully!');
+      const response = await axios.put(`http://localhost:8080/member/update/${member.member_Id}`, formData);
+      setMember(response.data);
+
+      // Display success message using toast
+      toast.success('Profile updated successfully!');
     } catch (error) {
-      // setMessage('Error updating profile. Please try again.');
       console.error('Error updating profile:', error);
+      // Display error message using toast
+      toast.error('Error updating profile. Please try again.');
     }
   };
+
+
+ 
 
   return (
     <div className="update-profile-container mt-5">
@@ -51,27 +64,29 @@ const EditProfile = ({member}) => {
       {message && <p className="success-message">{message}</p>}
       <form onSubmit={handleSubmit} className="update-profile-form mt-5">
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             id="name"
             name="memberName"
             value={formData.memberName}
             onChange={handleInputChange}
+            disabled
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
+            disabled
           />
         </div>
         <div className="form-group">
-          <label htmlFor="phone">Phone:</label>
+          <label htmlFor="phone">Phone</label>
           <input
             type="text"
             id="phone"
@@ -82,7 +97,7 @@ const EditProfile = ({member}) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="address">Address:</label>
+          <label htmlFor="address">Address</label>
           <input
             type="text"
             id="address"
@@ -92,14 +107,17 @@ const EditProfile = ({member}) => {
           />
         </div>
 
+        
+
         <div className='form-group'>
-  <label htmlFor="profile">Profile:</label>
+  <label htmlFor="profile">Profile</label>
   <select
     id="profile"
     name="profile"
     value={formData.profile}
     onChange={handleInputChange}
     className="form-group"
+    style={{ width: '100%', padding: '8px' }}
   >
     <option value="option0">-- Select Profile --</option>
     <option value="frontend">Frontend</option>
@@ -110,12 +128,17 @@ const EditProfile = ({member}) => {
 </div>
 
 
+
         
       
         <button type="submit" className="submit-button">Update Profile</button>
       </form>
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };
 
 export default EditProfile;
+
+
+

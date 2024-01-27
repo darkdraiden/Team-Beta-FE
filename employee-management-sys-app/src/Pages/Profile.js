@@ -2,21 +2,28 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Profile.css';
 
-const Profile = ({member}) => {
+const Profile = ({member,setMember}) => {
   
   const [email, setEmail] = useState(''); // State to store email
   const [password, setPassword] = useState(''); // State to store password
+  const id=localStorage.getItem("memberid");
+
+  const refData = async () => {
+    console.log(id);
+      const response = await axios.get(`http://localhost:8080/member/member-byId/${id}`);
+      console.log(response);
+     setMember(response.data);
+
+    
+  };
 
   useEffect(() => {
-    // Set your logged-in user's email and password
-    
-
-    // Set email and password states
+   
     setEmail(member.email);
     setPassword(member.password);
+    refData();
 
-    // Fetch user data based on email and password
-    // fetchUserData(member.email, userCredentials.password);
+    
   }, []);
 
   
@@ -38,12 +45,14 @@ const Profile = ({member}) => {
     width: '100%',
     borderCollapse: 'collapse',
     marginTop: '20px',
+    
   };
 
   const cellStyle = (index) => ({
     border: '1px solid #ddd',
     padding: '8px',
     backgroundColor: index % 2 === 0 ? '#E5F6D3' : '#C5E8B7',
+    textTransform: 'capitalize',
   });
 
   const thStyle = {
