@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const[member,setMember]=useState('');
+  
   // console.log(isAuthenticated);
   useEffect(()=>{
     if( sessionStorage.getItem("isLoggedIn")=="true"){
@@ -32,9 +33,9 @@ function App() {
       {(isAuthenticated===false)? (
         <div>
           {" "}
-          <Router>
+          <Router >
             <Routes>
-              <Route exact path="/auth" element={<Login setIsAuthenticated={setIsAuthenticated} setMember={setMember}/>} />
+              <Route exact path="/auth" element={<Login setIsAuthenticated={setIsAuthenticated} setMember={setMember} />} />
               <Route exact path="/signup" element={<Signup />} />
             </Routes>
           </Router>

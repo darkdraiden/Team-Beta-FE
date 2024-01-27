@@ -3,16 +3,14 @@ import axios from 'axios';
 
 const Salary = ({ member }) => {
   const [salary, setSalary] = useState(0);
-
-  useEffect(() => {
-    // Fetch salary on component mount
-    fetchSalary();
-  }, []);
+  const [showSalary, setShowSalary] = useState(false);
 
   const fetchSalary = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/member/salary/${member.member_Id}`);
+      console.log(response.data);
       setSalary(response.data);
+      setShowSalary(true); // Show salary after fetching
     } catch (error) {
       console.error('Error fetching salary:', error);
     }
@@ -27,7 +25,7 @@ const Salary = ({ member }) => {
     <div style={styles.centeredContainer}>
       <div style={styles.salaryContainer}>
         <h2>Salary Information</h2>
-        <p style={styles.salaryAmount}>Salary: ${salary}</p>
+        {showSalary && <p style={styles.salaryAmount}>Salary: ${salary}</p>}
         <button style={styles.fetchSalaryButton} onClick={handleFetchSalary}>
           Fetch Salary
         </button>
@@ -43,6 +41,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh', // Adjust if needed
+    backgroundColor: '#f0f0f0',
   },
   salaryContainer: {
     textAlign: 'center',

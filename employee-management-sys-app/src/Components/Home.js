@@ -6,7 +6,7 @@ import { BrowserRouter as Router,Route,Routes} from 'react-router-dom';
 import ManageTeam from '../Pages/ManageTeam';
 import Salary from '../Pages/Salary';
 import Leaves from '../Pages/Leaves';
-import OtherTeams from '../Pages/OtherTeams';
+// import OtherTeams from '../Pages/OtherTeams';
 import Profile from '../Pages/Profile';
 import EditProfile from '../Pages/EditProfile';
 
@@ -17,7 +17,7 @@ const Home = ({member, setMember}) => {
             <Sidebar/>
             <Routes>
                 <Route exact path='/' element={<Dash/>} ></Route>
-                <Route exact path='/profile' element={<Profile member={member}/>} ></Route>
+                <Route exact path='/profile' element={<Profile member={member} setMember={setMember}/>} ></Route>
                 <Route  exact path='/manageteam' element={<ManageTeam/>} ></Route>
                 <Route exact path='/salary' element={<Salary member={member}/> } ></Route>
                 <Route exact path='/leaves' element={<Leaves member={member}/>} ></Route>

@@ -11,14 +11,14 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #E5F6D3; /* Light green color */
+    background-color:'#f0f0f0';
   padding-bottom: 80px;
   border-radius: 8px;
   border: 1px solid black;
   }
   
   .update-profile-form {
-    background-color: white;
+    background-color: '#f0f0f0';
     width: 400px;
     padding: 20px;
     border: 1px solid #ccc;
@@ -54,7 +54,16 @@
   }
   
   .success-message {
-    color: green;
-    margin-top: 10px;
+    position: fixed;
+    top: 90px;
+    right: 10px;
+    background-color:'#f0f0f0' ; /* Green background color */
+    color: #fff; /* White text color */
+    padding: 15px; /* Padding around the message */
+    border-radius: 5px; /* Rounded corners */
+    text-align: center; /* Center text */
+    z-index: 1000; /* Ensure the message appears on top of other elements */
   }
+  
+  
   

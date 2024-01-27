@@ -2,21 +2,28 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Profile.css';
 
-const Profile = ({member}) => {
+const Profile = ({member,setMember}) => {
   
   const [email, setEmail] = useState(''); // State to store email
   const [password, setPassword] = useState(''); // State to store password
-  
+  const id=localStorage.getItem("memberid");
 
+  const refData = async () => {
+    console.log(id);
+      const response = await axios.get(`http://localhost:8080/member/member-byId/${id}`);
+      console.log(response);
+     setMember(response.data);
+
+    
+  };
 
   useEffect(() => {
    
     setEmail(member.email);
     setPassword(member.password);
-    
+    refData();
 
-    // Fetch user data based on email and password
-    // fetchUserData(member.email, userCredentials.password);
+    
   }, []);
 
   
