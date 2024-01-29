@@ -1,14 +1,60 @@
-
+/* 
 .sidebbar-container {
     position: fixed;
    
     background-color: #378b29;
 background-image: linear-gradient(315deg, #378b29 0%, #ffffff 74%);
-margin-top: 8px;
+margin-top: 10px;
   }
 
 
+#sidebar {
+  background-color: #89CFF3;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -100%; 
+  }
+} */
 
 
 
-  
+
+/* Sidebbar.css */
+
+/* Sidebbar.css */
+
+.sidebbar-container {
+  position: fixed;
+  top: 56px; /* Adjust the value based on your navbar height */
+  left: 0;
+  background: linear-gradient(to bottom, #d3e6fa, #bcdcfb, #a6d2fc, #90c7fd, #7acdfd);
+  /* background: linear-gradient(to left, #bdd9e1, #c2ddec, #c7e7f7, #ccf2ff, #d1fdff, #d6ffff, #dbffff, #e0ffff, #e5ffff, #eafbff, #effbff, #f4fbff); */
+
+
+ /* Set your desired blue color */
+  width: 250px; /* Adjust the width as needed */
+  height: calc(100% - 56px); /* Subtract navbar height from total height */
+}
+
+@media (max-width: 768px) {
+  .sidebbar-container {
+    width: 100%;
+    top: 0; /* Reset top margin for smaller screens */
+    height: 100%;
+  }
+}
+
+.nav-link {
+  color: #fff; /* Set text color */
+}
+
+.nav-link.active {
+  background-color: #fff; /* Set background color for active link */
+  color: #00A9FF; /* Set text color for active link */
+}
+
+.icon {
+  margin-right: 10px;
+}

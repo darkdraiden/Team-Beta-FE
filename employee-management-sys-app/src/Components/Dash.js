@@ -197,8 +197,8 @@
 
 
 
-import React from 'react';
-import './Dash.css'; // Import your CSS file for custom styles
+// import React from 'react';
+import './Dash.css'; 
 import DigitalClock from './DigitalClock';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faAddressCard } from '@fortawesome/free-solid-svg-icons';
@@ -208,8 +208,21 @@ import DigitalClockCard from './DigitalClockCard';
 
 
 const Dash = () => {
+  const videoStyle = {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    opacity: '0.5', // Adjust video opacity as needed
+    zIndex: '-1',
+  };
   return (
     <div className="container mt-5 my-container">
+     <video style={videoStyle} autoPlay loop muted>
+        <source src="https://media.istockphoto.com/id/1218568429/de/video/sternbild-der-blauen-liniensegmente-auf-dem-wei%C3%9Fen-hintergrund.mp4?s=mp4-640x640-is&k=20&c=X7pvsuEQVzJ1ewW3S9hdHooVh6-41CGdc59ko1Ch79M=" type="video/mp4" />
+      </video>
       <div className="row mt-5">
         <TotalEmployeesCard />
         <TotalProfilesCard />
@@ -221,3 +234,6 @@ const Dash = () => {
 }
 
 export default Dash;
+
+
+

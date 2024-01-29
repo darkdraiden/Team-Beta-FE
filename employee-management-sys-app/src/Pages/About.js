@@ -22,7 +22,7 @@ const About = () => {
                 About
               </NavLink>
 
-              <NavLink to="/Login" className="listName" activeClassName="activeItem">
+              <NavLink to="/login" className="listName" activeClassName="activeItem">
                 Login
               </NavLink>
             </div>
