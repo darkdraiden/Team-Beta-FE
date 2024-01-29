@@ -13,6 +13,8 @@ const TotalProfilesCard = () => {
         fontSize: '3em', // Set your preferred font size for the icons
         marginBottom: '10px', // Optional: Adjust the space between the icon and text
       };
+
+      
   return (
     <div className="col-md-4 mx-auto mt-4 text-center">
       <div className="card my-card" style={cardStyle}>

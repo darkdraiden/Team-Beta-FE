@@ -7,7 +7,7 @@ import './Sidebbar.css';
 const Sidebar = () => {
  
   return (
-    <div className="col-md-3 col-lg-2 sidebar-offcanvas pl-0 sidebbar-container" id="sidebar" role="navigation" style={{ backgroundColor: "#e9ecef", height: "100vh" }}>
+    <div className="col-md-3 col-lg-2 sidebar-offcanvas pl-0 sidebbar-container" id="sidebar" role="navigation" style={{ height: "100vh" ,top:56}}>
       <ul className="nav flex-column sticky-top pl-0 pt-5 p-3 mt-3 ">
        
       <li className="nav-item mb-2 ">
@@ -46,8 +46,6 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-
 
 
 
