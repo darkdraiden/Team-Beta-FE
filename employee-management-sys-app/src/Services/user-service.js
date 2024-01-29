@@ -13,7 +13,10 @@ const signup = async (userData) => {
 
 const loginf = async (userData) => {
   try {
+    const token=localStorage.getItem("token");
     const response = await axios.post('http://localhost:8080/member/login', userData);
+    console.log(response);
+    
     return response.data;
   } catch (error) {
     throw error;

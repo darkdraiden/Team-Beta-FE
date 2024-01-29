@@ -22,17 +22,19 @@ const Login = ({setIsAuthenticated,setMember}) => {
     email:'',
     password:''
   });
+  
 //   useEffect(()=>{
 //     sessionStorage.getItem("isLoggedIn");
 //     console.log(login);
 // })
 
-useEffect(() => {
-  const storedLogin = localStorage.getItem("userLogin");
-  if (storedLogin) {
-    setLogin(JSON.parse(storedLogin));
-  }
-}, []);
+// useEffect(() => {
+//   const storedLogin = localStorage.getItem("userLogin");
+//   if (storedLogin===undefined) {
+//     // setLogin(JSON.parse(storedLogin));
+//     console.log(storedLogin);
+//   }
+// }, []);
 
   const getdata = (e) => {
     // console.log(e.target.name);
@@ -44,30 +46,38 @@ useEffect(() => {
   };
 
 
-  const addData = (e) => {
+  const addData = async (e) => {
     e.preventDefault();
-    const { email, password } = login;
-
-    loginf(login)
-      .then((response) => {
-        setIsAuthenticated(response);
-        setMember(response);
+    try {
+      const { email, password } = login;
+      const response = await loginf(login);
+      console.log(response);
+      if (response) {
+        setIsAuthenticated(true);
+        setMember(response.member);
+        // Assuming response has both token and member properties
+        const { token, member } = response;
+        // Store token and member details
+        console.log("token from login" + token);
         sessionStorage.setItem("isLoggedIn", true);
-        localStorage.setItem("memberid",response.member_Id);
-        localStorage.setItem("userLogin", JSON.stringify(login)); // Save login data to localStorage
-
+        localStorage.setItem("memberid", member.member_Id);
+        localStorage.setItem("token", token);
+        // loginf.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         toast.success("Login Successfully");
         navigate("/");
         setLogin({
           email: "",
           password: "",
         });
-      })
-      .catch((error) => {
+      } else {
+        // Handle login failure
         toast.error("Please Enter Correct Email or Password");
-      });
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Something went wrong. Please try again.");
+    }
   };
-
 
 
   return (

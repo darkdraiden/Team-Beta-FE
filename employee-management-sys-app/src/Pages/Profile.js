@@ -127,9 +127,13 @@ const Profile = ({ member, setMember }) => {
 
   const refData = async () => {
     console.log(id);
-    const response = await axios.get(`http://localhost:8080/member/member-byId/${id}`);
-    console.log(response);
-    setMember(response.data);
+    const token=localStorage.getItem("token");
+    
+    
+    const response = await axios.get(`http://localhost:8080/member/member-byId/${id}`,{headers:{'Authorization':`Bearer ${token}`}});
+    const data=await response.data;
+    console.log(data);
+    setMember(data);
   };
 
   useEffect(() => {
