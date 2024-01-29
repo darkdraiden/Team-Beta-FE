@@ -1,5 +1,5 @@
 :root{
-    --mainColor:#198754;
+    --mainColor:#005A9C;
 }
 header{
     background-color: #fff;
@@ -26,15 +26,15 @@ header{
     
 }
 .logo{
-    width:65px;
-    height:50px;
+    width:55px;
+    height:45px;
     margin-left: 2rem;
     /* padding:0.5em em; */
     /* margin:0; */
 }
 .listName{
     margin-left: 1em;
-    color: #198754;
+    color: #005A9C;
     margin-right: 1em;
     text-decoration: none;
     font-size: 1.2rem;
@@ -47,7 +47,7 @@ header{
 }
 .mainSection{
     display:flex;
-    background-color: #e0f9ee; 
+    background-color: #CDF5FD; 
     justify-content: space-around;
     align-items: center;
     margin: 5% 8%; 
@@ -65,14 +65,14 @@ header{
 
 .contentBox h1{
     font-size: 2.5rem;
-    color:#198754;
+    color:#005A9C;
 }
 
 .contentBox p{
     font-size: 1.2rem;
     margin:1em 0;
     font-family: 'Poppins', sans-serif;
-    color:#198754;
+    color:#005A9C;
 
 }
 
@@ -87,7 +87,7 @@ header{
     border: 2px solid transparent;
     border-radius: 2em;
     background-image: linear-gradient(#fff,#fff);
-    background: radial-gradient(circle at bottom right,#1d9d61,#25c87c);
+    background: radial-gradient(circle at bottom right,#00A9FF,#A0E9FF);
     background-origin: border-box;
     background-clip: content-box,border-box;
 }
@@ -116,7 +116,7 @@ footer{
     bottom: 0;
     background-color: #fff;
     width:100%;
-    color:#198754;
+    color:#005A9C;
     padding:1em 0;
     
 }
@@ -125,7 +125,7 @@ footer{
 
 }
 .logoContainer h2{
-    color:#198754;
+    color:#005A9C;
     margin:auto;
     margin-left: 1.5%;
 
@@ -153,8 +153,11 @@ footer{
     .container-flex{
         flex-direction:column;
     }
-    .logo{
-        width:150px;
+    
+    .logo {
+        width: 70px; /* Adjust the width for smaller screens */
+        height: auto; /* Maintain aspect ratio */
+        margin-left: 0; /* Reset margin for smaller screens */
     }
 }
 
@@ -167,6 +170,11 @@ footer{
     }
     .listItem{
         margin-top: .2em;
+    }
+    .logo {
+        width: 50px; /* Adjust the width for even smaller screens */
+        height: auto; /* Maintain aspect ratio */
+        margin-left: 0; /* Reset margin for even smaller screens */
     }
 }
 
