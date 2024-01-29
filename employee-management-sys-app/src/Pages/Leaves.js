@@ -122,14 +122,19 @@ const Leaves = ({ member }) => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
-  useEffect(() => {
-    fetchLeaveCount();
-  }, [member]);
+  // useEffect(() => {
+  //   fetchLeaveCount();
+  // }, [member]);
+
+  const token=localStorage.getItem("token");
+const bearerToken="Bearer "+token;
 
   const fetchLeaveCount = async () => {
     try {
       if (member && member.member_Id) {
-        const response = await axios.get(`http://localhost:8080/member/leaves/${member.member_Id}`);
+        console.log( bearerToken);
+        console.log("leave token"+token);
+        const response = await axios.get(`http://localhost:8080/member/leaves/${member.member_Id}`,{headers:{'Authorization':bearerToken}});
         setLeaveCount(response.data);
       }
     } catch (error) {
@@ -137,21 +142,40 @@ const Leaves = ({ member }) => {
     }
   };
 
-  const handleApplyLeave = async () => {
+
+  const handleApplyLeave  = async () => {
     try {
       if (member && member.member_Id) {
-        await axios.put(`http://localhost:8080/member/leaves/${member.member_Id}`);
-        await fetchLeaveCount();
+        console.log( bearerToken);
+        console.log("leave token"+token);
+        // const response = await axios.get(`http://localhost:8080/member/leaves/${member.member_Id}`,{headers:{'Authorization':bearerToken}});
+        const response = await axios.put(`http://localhost:8080/member/leaves/${member.member_Id}`,{},{headers:{'Authorization':bearerToken}});
+        // setLeaveCount(response.data);
+      //  fetchLeaveCount();
         setIsApplyModalOpen(false);
       }
     } catch (error) {
-      console.error('Error applying leave:', error);
+      console.error('Error fetching leave count:', error);
     }
   };
+  // const handleApplyLeave = async () => {
+  //   try {
+  //     if (member && member.member_Id) {
+  //       console.log("leave token from leave apply page"+oken);
+  //       await axios.put(`http://localhost:8080/member/leaves/${member.member_Id}`,{headers:{'Authorization':bearerToken}});
+  //       console.log("apply leave");
+  //       await fetchLeaveCount();
+  //       setIsApplyModalOpen(false);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error applying leave:', error);
+  //   }
+  // };
 
   const handleViewLeaves = () => {
     try {
       setIsViewModalOpen(true);
+      fetchLeaveCount();
     } catch (error) {
       console.error('Error fetching leave count:', error);
     }
@@ -200,7 +224,8 @@ const Leaves = ({ member }) => {
           </Typography>
           <Button
             variant="contained"
-            onClick={() => setIsApplyModalOpen(true)}
+            onClick={() => {setIsApplyModalOpen(true) 
+          }}
             startIcon={<AddCircleOutline />}
             style={buttonStyle}
           >
@@ -231,10 +256,11 @@ const Leaves = ({ member }) => {
         {/* View Leaves Modal */}
         <Modal open={isViewModalOpen} onClose={handleCloseViewModal}>
           <Box sx={modalStyle}>
-            <Typography variant="h6" style={{ color: 'blue' }}>
+            <Typography variant="h6" style={{ color: 'blue' }} >
               View Leaves
             </Typography>
             <Typography variant="body1" style={{ color: 'blue' }}>
+
               Remaining Leaves: {leaveCount}
             </Typography>
             <Button

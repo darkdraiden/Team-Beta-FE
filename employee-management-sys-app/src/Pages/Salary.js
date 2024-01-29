@@ -82,7 +82,8 @@ const Salary = ({ member }) => {
 
   const fetchSalary = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/member/salary/${member.member_Id}`);
+      const token=localStorage.getItem("token");
+      const response = await axios.get(`http://localhost:8080/member/salary/${member.member_Id}`,{headers:{'Authorization':`Bearer ${token}`}});
       console.log(response.data);
 
       const ctc = 50000; // Assuming CTC is $50,000

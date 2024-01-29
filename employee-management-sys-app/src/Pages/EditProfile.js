@@ -179,7 +179,8 @@ const EditProfile = ({ member, setMember }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.put(`http://localhost:8080/member/update/${member.member_Id}`, formData);
+      const token=localStorage.getItem("token");
+      const response = await axios.put(`http://localhost:8080/member/update/${member.member_Id}`,formData,{headers:{'Authorization':`Bearer ${token}`}});
       setMember(response.data);
       toast.success('Profile updated successfully!');
     } catch (error) {
