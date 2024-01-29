@@ -173,12 +173,12 @@ const Salary = ({ member }) => {
       <button style={styles.fetchSalaryButton} onClick={handleFetchSalary}>
         View Salary
       </button>
-      <img
+      {/* <img
         src="https://www.cpapracticeadvisor.com/wp-content/uploads/sites/2/2022/07/20145/Professional_Payroll_Services_Can_Help_Small_Businesses_1_.56264d2be7d44.png"
         alt="Payroll Services"
         style={{ width: '32%', marginTop: '100px' }}
       />
-      
+       */}
 
 
     </div>

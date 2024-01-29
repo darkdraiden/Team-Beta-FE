@@ -101,7 +101,7 @@ body {
   
   .login {
 	height: auto;
-	background: #eee;
+	background: #CDF5FD;
 	border-radius: 10px;
 	transform: translateY(-5%); /* Adjusted translateY for responsiveness */
 	transition: 0.8s ease-in-out;

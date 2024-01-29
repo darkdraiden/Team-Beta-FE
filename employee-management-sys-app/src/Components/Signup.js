@@ -334,6 +334,7 @@ import { useEffect } from 'react';
 import logo from '../images/logo.png';
 //import '../YourCSSFile.css'; // Add your custom CSS file for styling
 
+
 const Signup = () => {
   const [inpval, setInpval] = useState({
     memberName: "",

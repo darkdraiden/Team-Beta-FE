@@ -126,6 +126,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Nvbar.css';
+
 import logo from '../images/logo.png';
 
 const Nvbar = ({ name, setIsAuthenticated }) => {
