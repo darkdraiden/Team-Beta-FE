@@ -11,6 +11,7 @@ const About = () => {
         <div className="container container-flex">
           <div className="logoContainer">
             <img src={logo} alt="logo" className="logo" />
+            <h2>EmploEase</h2>
           </div>
           <nav>
             <div className="List">
@@ -33,10 +34,10 @@ const About = () => {
         <div className="contentBox">
           {/* <h1>Know More About Us</h1> */}
           <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id auctor magna, pellentesque tempus tellus. CAenean sagittis non dui et dictum. Proin accumsan mauris eget risus varius tincidunt.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id auctor magna, pellentesque tempus tellus. CAenean sagittis non dui et dictum.
           </p>
           <p>
-          Maecenas nec purus augue. In hendrerit mollis est, sit amet sagittis turpis congue id. Quisque scelerisque nec nunc at elementum. Morbi porttitor ultricies ex, ut tristique nisi accumsan eu. In arcu purus, tincidunt sit amet placerat quis, consequat non neque. Curabitur tortor lectus, volutpat non viverra eu, lacinia vitae tortor. Vivamus fringilla est eu massa vulputate, id vestibulum quam venenatis. 
+          Maecenas nec purus augue.Quisque scelerisque nec nunc at elementum, lacinia vitae tortor. Vivamus fringilla est eu massa vulputate, id vestibulum quam venenatis. 
           </p>
           {/* <div classname="btnBox">
             <div className="btn">

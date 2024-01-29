@@ -10,7 +10,7 @@ import '../Css/HomeStyle.css';
 import logo from '../images/logo.png';
 import login_image from '../images/login_image.gif';
 
-
+import '../Css/Login.css';
 const Login = ({setIsAuthenticated,setMember}) => {
 
   
@@ -47,7 +47,7 @@ useEffect(() => {
   const addData = (e) => {
     e.preventDefault();
     const { email, password } = login;
-
+    console.log(password);
     loginf(login)
       .then((response) => {
         setIsAuthenticated(response);
@@ -76,6 +76,7 @@ useEffect(() => {
         <div className="container container-flex">
           <div className="logoContainer">
             <img src={logo} alt="logo" className="logo" />
+            <h2>EmploEase</h2>
           </div>
           <nav>
             <div className="List">
@@ -93,32 +94,29 @@ useEffect(() => {
           </nav>
         </div>
       </header>
+      
       <div className="custom-container mt-5">
-        <section className='d-flex justify-content-center'> {/* Center the columns */}
-        
-        <div className="right_data mt-5" style={{ display: 'flex', alignItems: 'center' }}>
-            <div className="sign_img mt-3">
-              <img src={login_image} style={{ maxWidth: 400 }} alt="" />
-            </div>
+        <section className='d-flex justify-content-center'>
+          <div className="right_data mt-3 sample">
+            <img src={login_image} style={{ maxWidth: '100%' }} alt="" />
           </div>
-          <div className="left_data mt-5 p-5 shadow" style={{ width: "50%", border: '1px solid #ddd', display: 'flex', flexDirection: 'column', background: '#e0f9ee' ,borderRadius: '7px'}}>
-            <h3 className='text-center'>Login</h3>
+          <div className="left_data mt-3 p-3 shadow sample" style={{background: '#CDF5FD' ,borderRadius: '7px'}}>
+            <h3 className='text-center' style={{ color: '#005A9C' }}>Login</h3>
             <br />
             <Form>
-              <Form.Group className="mb-3" controlId="formBasicEmail"> {/* Removed col-lg-6 */}
-                <Form.Control type="email" name='email' placeholder="Enter email" onChange={getdata}/>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Control type="email" name='email' placeholder="Enter email" onChange={getdata} />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword"> {/* Removed col-lg-6 */}
-                <Form.Control type="password" name='password' placeholder="Password" onChange={getdata}/>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Control type="password" name='password' placeholder="Password" onChange={getdata} />
               </Form.Group>
-              <Button variant="primary" className='w-100' style={{ background: "rgb(67, 185, 127)" }} type="submit" onClick={addData}>  {/* Added w-100 to make the button full width */}
+              <Button variant="primary" className='w-100' style={{ background: "rgb(67, 185, 127)" }} type="submit" onClick={addData}>
                 Submit
               </Button>
             </Form>
             <p className='mt-3 p-3'>If you are not registered? <span><NavLink to='/Signup'>Register Here</NavLink></span> </p>
           </div>
-          
         </section>
         <ToastContainer />
       </div>

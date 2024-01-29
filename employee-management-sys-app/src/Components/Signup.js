@@ -333,6 +333,7 @@ import { signup } from "../Services/user-service";
 import { useEffect } from 'react';
 import logo from '../images/logo.png';
 //import '../YourCSSFile.css'; // Add your custom CSS file for styling
+
 const Signup = () => {
   const [inpval, setInpval] = useState({
     memberName: "",
@@ -343,9 +344,11 @@ const Signup = () => {
     phoneNumber: "",
     address: "",
   });
+
   useEffect(() => {
     console.log(inpval);
   });
+
   const handleProfileChange = (event) => {
     setInpval({ ...inpval, profile: event.target.value });
   };
@@ -356,9 +359,11 @@ const Signup = () => {
       [name]: value,
     }));
   };
+
   const addData = (e) => {
     e.preventDefault();
     const { memberName, email, dob, password, phoneNumber, address, profile } = inpval;
+
     signup(inpval)
       .then(() => {
         toast.success("User registered successfully");
@@ -384,6 +389,7 @@ const Signup = () => {
           toast.error("An error occurred during the request", { position: "top-center" });
         }
       });
+
     if (
       memberName === "" ||
       email === "" ||
@@ -403,6 +409,7 @@ const Signup = () => {
       toast.error("Select profile");
     }
   };
+
   return (
     <>
       <header>
@@ -419,6 +426,7 @@ const Signup = () => {
               <NavLink exact to="/About" className="listName" activeClassName="activeItem">
                 About
               </NavLink>
+
               <NavLink to="/Login" className="listName" activeClassName="activeItem">
                 Login
               </NavLink>
@@ -426,6 +434,7 @@ const Signup = () => {
           </nav>
         </div>
       </header>
+
       <div className="container mt-5">
         <section className="d-flex justify-content-center align-items-center">
           <div
@@ -435,6 +444,7 @@ const Signup = () => {
             <br />
             <Form>
               {/* Your Form Components Here */}
+
               <Form.Group className="mb-3" controlId="formBasicName">
                 <Form.Control
                   type="text"
@@ -477,12 +487,16 @@ const Signup = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicProfile">
                 {/* <Form.Label>Select Profile</Form.Label> */}
+
                 <Form.Control as="select" name="profile" onChange={handleProfileChange} value={inpval.profile}>
+
                   <option value="option0">--select Profile--</option>
                   <option value="Java">Java </option>
                   <option value="Python">Python</option>
                   <option value="Node Js">Node Js</option>
+
                   <option value="ELK">ELK</option>
+
                 </Form.Control>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -507,10 +521,11 @@ const Signup = () => {
               <span>
                 <NavLink to="/login">Login Here</NavLink>
               </span>{" "}
-            </p>
+            </p> 
           </div>
         </section>
       </div>
+
       <footer>
         <div className="copyright">
           <p>All rights reserved &copy;</p>
@@ -520,4 +535,5 @@ const Signup = () => {
     </>
   );
 };
+
 export default Signup;
