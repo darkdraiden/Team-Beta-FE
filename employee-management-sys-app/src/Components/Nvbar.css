@@ -34,3 +34,17 @@
   .logo {
     border-radius: 50%;
   } */
+
+
+  .navbar-custom {
+    /* background: linear-gradient(to right, #bdd9e1, #c2ddec, #c7e7f7, #ccf2ff, #d1fdff, #d6ffff, #dbffff, #e0ffff, #e5ffff, #eafbff, #effbff, #f4fbff); */
+    background: linear-gradient(to right, #bdd9e1, #aecfe0, #9ec5de, #8ebade, #7eaddd, #6ea3dc, #5e99da, #4e8fd9, #3e85d7, #2e7bd6, #1e71d5, #0e67d3);
+
+
+  }
+
+
+  .navbar-brand {
+    font-weight: bold;
+    
+  }
