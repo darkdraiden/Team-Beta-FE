@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import DigitalClock from './DigitalClock';
 
 const DigitalClockCard = () => {
@@ -30,7 +30,3 @@ const DigitalClockCard = () => {
 }
 
 export default DigitalClockCard;
-
-
-
-
