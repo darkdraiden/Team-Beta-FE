@@ -1,9 +1,9 @@
 .edit-container{
     position:relative;
-    left:5%;
+    left:20%;
     padding-top: 120px;
     height: 100vh;
-    /* margin-top: 5%; */
+    margin-top: 7%;
 }
 
 .update-profile-container {
@@ -11,17 +11,19 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #E5F6D3; /* Light green color */
+    background-color:'#f0f0f0';
   padding-bottom: 80px;
   border-radius: 8px;
   border: 1px solid black;
+  margin-left: 10%;
+
   }
   
   .update-profile-form {
-    background-color: white;
+    background-color: #AEE2FF;
     width: 400px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;     
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -45,16 +47,62 @@
   }
   
   .submit-button {
-    background-color: #579d51;
+    background-color: #00A9FF;
     color: #fff;
     padding: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
+  } 
   
   .success-message {
-    color: green;
-    margin-top: 10px;
+    position: fixed;
+    top: 90px;
+    right: 10px;
+    background-color:'#f0f0f0' ; 
+    color: #fff; 
+    padding: 15px;
+    border-radius: 5px; 
+    text-align: center; 
+    z-index: 1000; 
   }
   
+  
+  
+
+/* EditProfile.css */
+
+.edit-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 56px); 
+  overflow-y: auto;
+}
+
+.edit-profile-content {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+}
+
+
+
+.update-profile-form {
+  width: 70%; 
+  padding: 20px;
+}
+
+
+.select-field {
+  width: 100%; /* Make the select field full width */
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+
+
+  /* EditProfile.css */

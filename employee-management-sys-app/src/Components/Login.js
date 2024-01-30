@@ -5,15 +5,16 @@ import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from "react-router-dom";
 import { loginf } from "../Services/user-service";
-
-
-
+import { useNavigate } from "react-router-dom";
+import '../Css/HomeStyle.css';
+import logo from '../images/logo.png';
+import login_image from '../images/login_image.gif';
 
 
 const Login = ({setIsAuthenticated,setMember}) => {
 
   
-  
+  const navigate=useNavigate();
 
   
 
@@ -21,10 +22,19 @@ const Login = ({setIsAuthenticated,setMember}) => {
     email:'',
     password:''
   });
-  useEffect(()=>{
-    sessionStorage.getItem("isLoggedIn");
-    console.log(login);
-})
+  
+//   useEffect(()=>{
+//     sessionStorage.getItem("isLoggedIn");
+//     console.log(login);
+// })
+
+// useEffect(() => {
+//   const storedLogin = localStorage.getItem("userLogin");
+//   if (storedLogin===undefined) {
+//     // setLogin(JSON.parse(storedLogin));
+//     console.log(storedLogin);
+//   }
+// }, []);
 
   const getdata = (e) => {
     // console.log(e.target.name);
@@ -36,45 +46,74 @@ const Login = ({setIsAuthenticated,setMember}) => {
   };
 
 
-  const addData = (e) => {
+  const addData = async (e) => {
     e.preventDefault();
-    const {email,password} = login;
-  
-    loginf(login)
-      .then((response) => {
-        
-        setIsAuthenticated(response);
-        setMember(response);
-        sessionStorage.setItem("isLoggedIn",true);
-
+    try {
+      const { email, password } = login;
+      const response = await loginf(login);
+      console.log(response);
+      if (response) {
+        setIsAuthenticated(true);
+        setMember(response.member);
+        // Assuming response has both token and member properties
+        const { token, member } = response;
+        // Store token and member details
+        console.log("token from login" + token);
+        sessionStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("memberid", member.memberId);
+        localStorage.setItem("token", token);
+        // loginf.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         toast.success("Login Successfully");
+        navigate("/");
         setLogin({
-          
           email: "",
           password: "",
-          
         });
-      })
-      .catch((error) => {
-        // Handle the error and show error message
-        
-       toast.error("Please Enter Correct Email or Password");
-      });
-  
-   
+      } else {
+        // Handle login failure
+        toast.error("Please Enter Correct Email or Password");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Something went wrong. Please try again.");
+    }
   };
+
+
   return (
     <>
-      <div className="container mt-5">
+      <header>
+        <div className="container container-flex">
+          <div className="logoContainer">
+            <img src={logo} alt="logo" className="logo" />
+            <h2>EmploEase</h2>
+          </div>
+          <nav>
+            <div className="List">
+              <NavLink  to="/landing" className="listName" activeClassName="activeItem">
+                Home
+              </NavLink>
+              <NavLink  to="/About" className="listName" activeClassName="activeItem">
+                About
+              </NavLink>
+
+              <NavLink  to="/login" className="listName" activeClassName="activeItem">
+                Login
+              </NavLink>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <div className="custom-container mt-5">
         <section className='d-flex justify-content-center'> {/* Center the columns */}
         
         <div className="right_data mt-5" style={{ display: 'flex', alignItems: 'center' }}>
             <div className="sign_img mt-3">
-              <img src="https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg?size=626&ext=jpg&ga=GA1.1.1389609210.1705655173&semt=sph" style={{ maxWidth: 400 }} alt="" />
+              <img src={login_image} style={{ maxWidth: 400 }} alt="" />
             </div>
           </div>
-          <div className="left_data mt-5 p-5 shadow" style={{ width: "50%", border: '1px solid #ddd', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', display: 'flex', flexDirection: 'column' }}>
-            <h3 className='text-center'>Login</h3>
+          <div className="left_data mt-5 p-5 shadow" style={{ width: "50%", border: '1px solid #ddd', display: 'flex', flexDirection: 'column', background: '#CDF5FD' ,borderRadius: '7px'}}>
+            <h3 className='text-center' style={{ color: '#005A9C' }}>Login</h3>
             <br />
             <Form>
               <Form.Group className="mb-3" controlId="formBasicEmail"> {/* Removed col-lg-6 */}
@@ -94,9 +133,13 @@ const Login = ({setIsAuthenticated,setMember}) => {
         </section>
         <ToastContainer />
       </div>
+      <footer>
+          <div class="copyright">
+              <p>All rights reserved &copy;</p>
+          </div>
+        </footer>
     </>
   )
 }
 
 export default Login;
-  
