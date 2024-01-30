@@ -60,7 +60,7 @@ const Login = ({setIsAuthenticated,setMember}) => {
         // Store token and member details
         console.log("token from login" + token);
         sessionStorage.setItem("isLoggedIn", true);
-        localStorage.setItem("memberid", member.member_Id);
+        localStorage.setItem("memberid", member.memberId);
         localStorage.setItem("token", token);
         // loginf.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         toast.success("Login Successfully");
